@@ -1,0 +1,65 @@
+<svg viewBox="0 0 250 50" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main Hull -->
+  <path d="M10 20 L240 20 L235 15 L240 25 L235 35 L240 30 L10 30 L5 25 L10 20 Z" 
+        fill="#2c3e50" stroke="#34495e" stroke-width="1"/>
+  
+  <!-- Flight Deck -->
+  <rect x="15" y="15" width="220" height="20" fill="#7f8c8d" stroke="#95a5a6" stroke-width="0.5"/>
+  
+  <!-- Flight Deck Lines -->
+  <line x1="25" y1="17" x2="25" y2="33" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="45" y1="17" x2="45" y2="33" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="65" y1="17" x2="65" y2="33" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="85" y1="17" x2="85" y2="33" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="105" y1="17" x2="105" y2="33" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="125" y1="17" x2="125" y2="33" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="145" y1="17" x2="145" y2="33" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="165" y1="17" x2="165" y2="33" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="185" y1="17" x2="185" y2="33" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="205" y1="17" x2="205" y2="33" stroke="#ecf0f1" stroke-width="0.5"/>
+  <line x1="225" y1="17" x2="225" y2="33" stroke="#ecf0f1" stroke-width="0.5"/>
+  
+  <!-- Bridge/Control Tower -->
+  <rect x="180" y="8" width="25" height="15" fill="#34495e" stroke="#2c3e50" stroke-width="0.5"/>
+  <rect x="182" y="4" width="21" height="8" fill="#34495e" stroke="#2c3e50" stroke-width="0.5"/>
+  
+  <!-- Radar/Communications -->
+  <circle cx="190" cy="6" r="2" fill="#e74c3c"/>
+  <line x1="188" y1="4" x2="192" y2="8" stroke="#e74c3c" stroke-width="0.5"/>
+  <line x1="192" y1="4" x2="188" y2="8" stroke="#e74c3c" stroke-width="0.5"/>
+  
+  <!-- Weapons Systems -->
+  <circle cx="60" cy="18" r="2" fill="#34495e" stroke="#2c3e50"/>
+  <circle cx="80" cy="32" r="2" fill="#34495e" stroke="#2c3e50"/>
+  <circle cx="120" cy="18" r="2" fill="#34495e" stroke="#2c3e50"/>
+  <circle cx="140" cy="32" r="2" fill="#34495e" stroke="#2c3e50"/>
+  
+  <!-- Aircraft Silhouettes -->
+  <g transform="translate(35, 25)">
+    <path d="M0 0 L6 -1 L8 0 L6 1 Z" fill="#2c3e50"/>
+    <path d="M2 -1 L2 -3 L4 -3 L4 -1" fill="#2c3e50"/>
+    <path d="M2 1 L2 3 L4 3 L4 1" fill="#2c3e50"/>
+  </g>
+  
+  <g transform="translate(55, 25)">
+    <path d="M0 0 L6 -1 L8 0 L6 1 Z" fill="#2c3e50"/>
+    <path d="M2 -1 L2 -3 L4 -3 L4 -1" fill="#2c3e50"/>
+    <path d="M2 1 L2 3 L4 3 L4 1" fill="#2c3e50"/>
+  </g>
+  
+  <g transform="translate(75, 25)">
+    <path d="M0 0 L6 -1 L8 0 L6 1 Z" fill="#2c3e50"/>
+    <path d="M2 -1 L2 -3 L4 -3 L4 -1" fill="#2c3e50"/>
+    <path d="M2 1 L2 3 L4 3 L4 1" fill="#2c3e50"/>
+  </g>
+  
+  <!-- Anchors -->
+  <g transform="translate(20, 25)">
+    <circle cx="0" cy="0" r="1.5" fill="#ecf0f1" stroke="#bdc3c7"/>
+    <path d="M-1 -1 L1 1 M1 -1 L-1 1" stroke="#bdc3c7" stroke-width="0.5"/>
+  </g>
+  
+  <!-- Bow Wave -->
+  <path d="M5 25 Q10 22 15 25 Q10 28 5 25" fill="none" stroke="#3498db" stroke-width="0.5" opacity="0.6"/>
+</svg>
+

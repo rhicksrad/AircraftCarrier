@@ -1,0 +1,72 @@
+<svg viewBox="0 0 150 50" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main Hull -->
+  <path d="M10 20 L140 20 L135 15 L140 25 L135 30 L140 35 L10 30 L5 25 L10 20 Z" 
+        fill="#2c3e50" stroke="#34495e" stroke-width="1"/>
+  
+  <!-- Upper Deck -->
+  <rect x="15" y="17" width="120" height="16" fill="#34495e" stroke="#2c3e50" stroke-width="0.5"/>
+  
+  <!-- Main Gun Turret (Forward) -->
+  <g transform="translate(35, 25)">
+    <!-- Turret Base -->
+    <circle cx="0" cy="0" r="6" fill="#2c3e50" stroke="#34495e"/>
+    <!-- Main Gun -->
+    <rect x="-1.5" y="-10" width="3" height="10" fill="#34495e"/>
+    <!-- Turret Details -->
+    <circle cx="0" cy="0" r="3.5" fill="#34495e"/>
+  </g>
+  
+  <!-- Rear Gun Turret -->
+  <g transform="translate(115, 25)">
+    <!-- Turret Base -->
+    <circle cx="0" cy="0" r="5" fill="#2c3e50" stroke="#34495e"/>
+    <!-- Main Gun -->
+    <rect x="-1" y="-8" width="2" height="8" fill="#34495e"/>
+    <!-- Turret Details -->
+    <circle cx="0" cy="0" r="3" fill="#34495e"/>
+  </g>
+  
+  <!-- Bridge/Command Structure -->
+  <rect x="75" y="10" width="15" height="10" fill="#34495e" stroke="#2c3e50" stroke-width="0.5"/>
+  <rect x="77" y="7" width="11" height="7" fill="#34495e" stroke="#2c3e50" stroke-width="0.5"/>
+  
+  <!-- Radar/Communications -->
+  <circle cx="82" cy="9" r="1.5" fill="#e74c3c"/>
+  <line x1="80.5" y1="7.5" x2="83.5" y2="10.5" stroke="#e74c3c" stroke-width="0.5"/>
+  <line x1="83.5" y1="7.5" x2="80.5" y2="10.5" stroke="#e74c3c" stroke-width="0.5"/>
+  
+  <!-- Smoke Stack -->
+  <rect x="65" y="12" width="6" height="8" fill="#34495e" stroke="#2c3e50" stroke-width="0.5"/>
+  
+  <!-- Secondary Weapons -->
+  <circle cx="20" cy="22" r="1.5" fill="#34495e" stroke="#2c3e50"/>
+  <circle cx="20" cy="28" r="1.5" fill="#34495e" stroke="#2c3e50"/>
+  <circle cx="130" cy="22" r="1.5" fill="#34495e" stroke="#2c3e50"/>
+  <circle cx="130" cy="28" r="1.5" fill="#34495e" stroke="#2c3e50"/>
+  
+  <!-- Torpedo Tubes -->
+  <rect x="50" y="19" width="8" height="2" fill="#2c3e50" stroke="#34495e" stroke-width="0.5"/>
+  <rect x="50" y="29" width="8" height="2" fill="#2c3e50" stroke="#34495e" stroke-width="0.5"/>
+  
+  <!-- Depth Charge Racks -->
+  <circle cx="95" cy="19" r="1" fill="#e67e22"/>
+  <circle cx="98" cy="19" r="1" fill="#e67e22"/>
+  <circle cx="101" cy="19" r="1" fill="#e67e22"/>
+  <circle cx="95" cy="31" r="1" fill="#e67e22"/>
+  <circle cx="98" cy="31" r="1" fill="#e67e22"/>
+  <circle cx="101" cy="31" r="1" fill="#e67e22"/>
+  
+  <!-- Anchor -->
+  <g transform="translate(17, 25)">
+    <circle cx="0" cy="0" r="1.5" fill="#ecf0f1" stroke="#bdc3c7"/>
+    <path d="M-1 -1 L1 1 M1 -1 L-1 1" stroke="#bdc3c7" stroke-width="0.5"/>
+  </g>
+  
+  <!-- Hull Details -->
+  <line x1="15" y1="22" x2="135" y2="22" stroke="#2c3e50" stroke-width="0.5" opacity="0.7"/>
+  <line x1="15" y1="28" x2="135" y2="28" stroke="#2c3e50" stroke-width="0.5" opacity="0.7"/>
+  
+  <!-- Bow Wave -->
+  <path d="M5 25 Q10 22 15 25 Q10 28 5 25" fill="none" stroke="#3498db" stroke-width="0.5" opacity="0.6"/>
+</svg>
+

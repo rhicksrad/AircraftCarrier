@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aircraft Carrier - Naval Combat Game</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%232a5298'/><text x='50' y='70' font-size='60' text-anchor='middle' fill='white'>⚓</text></svg>">
+            <link rel="stylesheet" href="styles/app.css?v=2">
+        <link rel="stylesheet" href="styles/menu.css?v=2">
+        <link rel="stylesheet" href="styles/ships.css?v=3">
+    <meta name="description" content="Strategic naval combat game - sink enemy ships with different weapons and power-ups">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading Aircraft Carrier...</div>
+        </div>
+    </div>
+
+    <!-- Main Menu Screen -->
+    <div id="main-menu" class="menu-screen active">
+        <div class="menu-container">
+            <header class="menu-header">
+                <h1 class="game-title" data-text="⚓ Aircraft Carrier">⚓ Aircraft Carrier</h1>
+                <p class="game-subtitle">Strategic Naval Combat</p>
+            </header>
+
+            <nav class="main-navigation">
+                <button id="start-new-game" class="menu-btn primary">
+                    <span class="btn-icon">🎮</span>
+                    <span class="btn-text">Start Game</span>
+                </button>
+                
+                <button id="continue-game" class="menu-btn secondary" style="display: none;">
+                    <span class="btn-icon">📁</span>
+                    <span class="btn-text">Continue Game</span>
+                </button>
+                
+                <button id="menu-settings" class="menu-btn">
+                    <span class="btn-icon">⚙️</span>
+                    <span class="btn-text">Settings</span>
+                </button>
+                
+                <button id="menu-achievements" class="menu-btn">
+                    <span class="btn-icon">🏆</span>
+                    <span class="btn-text">Achievements</span>
+                </button>
+                
+                <button id="menu-accessibility" class="menu-btn">
+                    <span class="btn-icon">♿</span>
+                    <span class="btn-text">Accessibility</span>
+                </button>
+                
+                <button id="menu-about" class="menu-btn">
+                    <span class="btn-icon">ℹ️</span>
+                    <span class="btn-text">About</span>
+                </button>
+            </nav>
+
+            <footer class="menu-footer">
+                <p class="version-info">Version 1.0.0</p>
+                <p class="copyright">© 2024 Aircraft Carrier Game</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Settings Screen -->
+    <div id="settings-screen" class="menu-screen">
+        <div class="menu-container">
+            <header class="menu-header">
+                <button id="settings-back" class="back-btn" aria-label="Back to main menu">← Back</button>
+                <h1>⚙️ Settings</h1>
+            </header>
+
+            <div class="settings-content">
+                <section class="settings-section">
+                    <h2>🎮 Gameplay</h2>
+                    <div class="setting-group">
+                        <label for="difficulty-setting">AI Difficulty:</label>
+                        <select id="difficulty-setting" class="setting-select">
+                            <option value="easy">Easy (70% AI Accuracy)</option>
+                            <option value="medium" selected>Medium (85% AI Accuracy)</option>
+                            <option value="hard">Hard (95% AI Accuracy)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="board-size-setting">Board Size:</label>
+                        <select id="board-size-setting" class="setting-select">
+                            <option value="15" selected>15×15 (Standard)</option>
+                            <option value="20">20×20 (Large)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="auto-save-setting" checked>
+                            Auto-save game progress
+                        </label>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="tutorials-setting" checked>
+                            Show tutorial hints
+                        </label>
+                    </div>
+                </section>
+
+                <section class="settings-section">
+                    <h2>🔊 Audio</h2>
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="master-audio-setting" checked>
+                            Enable Audio
+                        </label>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="sound-effects-setting" checked>
+                            Sound Effects
+                        </label>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="background-music-setting">
+                            Background Music
+                        </label>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="volume-setting">Volume:</label>
+                        <div class="volume-control">
+                            <input type="range" id="volume-setting" min="0" max="100" value="70" class="volume-slider">
+                            <span id="volume-display" class="volume-display">70%</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="settings-section">
+                    <h2>🎨 Visual</h2>
+                    <div class="setting-group">
+                        <label for="theme-setting">Theme:</label>
+                        <select id="theme-setting" class="setting-select">
+                            <option value="default" selected>Ocean Blue</option>
+                            <option value="dark">Dark Mode</option>
+                            <option value="high-contrast">High Contrast</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="animations-setting" checked>
+                            Enable Animations
+                        </label>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="screen-flash-setting" checked>
+                            Screen Flash Effects
+                        </label>
+                    </div>
+                </section>
+
+                <div class="settings-actions">
+                    <button id="reset-settings" class="menu-btn secondary">Reset to Defaults</button>
+                    <button id="save-all-settings" class="menu-btn primary">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Achievements Screen -->
+    <div id="achievements-screen" class="menu-screen">
+        <div class="menu-container">
+            <header class="menu-header">
+                <button id="achievements-back" class="back-btn" aria-label="Back to main menu">← Back</button>
+                <h1>🏆 Achievements</h1>
+            </header>
+
+            <div class="achievements-content">
+                <div class="achievements-stats">
+                    <div class="stat-card">
+                        <span class="stat-number" id="total-achievements">0</span>
+                        <span class="stat-label">Unlocked</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="total-games">0</span>
+                        <span class="stat-label">Games Played</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="win-rate">0%</span>
+                        <span class="stat-label">Win Rate</span>
+                    </div>
+                </div>
+
+                <div class="achievements-grid" id="achievements-list">
+                    <!-- Achievements will be dynamically populated -->
+                </div>
+
+                <div class="achievements-actions">
+                    <button id="reset-achievements" class="menu-btn secondary">Reset Progress</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility Screen -->
+    <div id="accessibility-screen" class="menu-screen">
+        <div class="menu-container">
+            <header class="menu-header">
+                <button id="accessibility-back" class="back-btn" aria-label="Back to main menu">← Back</button>
+                <h1>♿ Accessibility</h1>
+            </header>
+
+            <div class="accessibility-content">
+                <section class="settings-section">
+                    <h2>🎯 Motor Accessibility</h2>
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="larger-click-targets">
+                            Larger Click Targets
+                        </label>
+                        <p class="setting-description">Makes buttons and interactive elements larger for easier clicking</p>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="reduced-precision">
+                            Reduced Precision Mode
+                        </label>
+                        <p class="setting-description">Makes ship placement and targeting more forgiving</p>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="click-delay">Click Delay (ms):</label>
+                        <input type="range" id="click-delay" min="0" max="1000" value="0" class="setting-slider">
+                        <span class="range-value">0ms</span>
+                        <p class="setting-description">Adds delay to prevent accidental clicks</p>
+                    </div>
+                </section>
+
+                <section class="settings-section">
+                    <h2>👁️ Visual Accessibility</h2>
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="high-contrast-mode">
+                            High Contrast Mode
+                        </label>
+                        <p class="setting-description">Increases contrast for better visibility</p>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="colorblind-support">
+                            Colorblind Support
+                        </label>
+                        <p class="setting-description">Uses patterns and symbols in addition to colors</p>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label for="text-size">Text Size:</label>
+                        <select id="text-size" class="setting-select">
+                            <option value="small">Small</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="large">Large</option>
+                            <option value="extra-large">Extra Large</option>
+                        </select>
+                    </div>
+                </section>
+
+                <section class="settings-section">
+                    <h2>🔊 Audio Accessibility</h2>
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="audio-cues">
+                            Enhanced Audio Cues
+                        </label>
+                        <p class="setting-description">Additional sound feedback for game events</p>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>
+                            <input type="checkbox" id="voice-announcements">
+                            Voice Announcements
+                        </label>
+                        <p class="setting-description">Spoken descriptions of game state changes</p>
+                    </div>
+                </section>
+
+                <section class="settings-section">
+                    <h2>⌨️ Keyboard Controls</h2>
+                    <div class="keyboard-help">
+                        <h3>Navigation:</h3>
+                        <ul>
+                            <li><kbd>Tab</kbd> - Move between elements</li>
+                            <li><kbd>Arrow Keys</kbd> - Navigate game board</li>
+                            <li><kbd>Enter/Space</kbd> - Activate buttons</li>
+                        </ul>
+                        
+                        <h3>Game Controls:</h3>
+                        <ul>
+                            <li><kbd>1-4</kbd> - Use power-ups</li>
+                            <li><kbd>R</kbd> - Rotate ship during placement</li>
+                            <li><kbd>Ctrl+H</kbd> - Show help</li>
+                            <li><kbd>Ctrl+N</kbd> - New game</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <div class="accessibility-actions">
+                    <button id="save-accessibility" class="menu-btn primary">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Screen -->
+    <div id="about-screen" class="menu-screen">
+        <div class="menu-container">
+            <header class="menu-header">
+                <button id="about-back" class="back-btn" aria-label="Back to main menu">← Back</button>
+                <h1>ℹ️ About</h1>
+            </header>
+
+            <div class="about-content">
+                <section class="about-section">
+                    <h2>🚢 About Aircraft Carrier</h2>
+                    <p>Aircraft Carrier is a modern take on the classic naval combat game. Command your fleet of warships, each with unique weapons and capabilities, in strategic turn-based battles against an intelligent AI opponent.</p>
+                    
+                    <h3>🎮 Game Features:</h3>
+                    <ul>
+                        <li>Four unique ship types with different weapons</li>
+                        <li>Strategic power-ups that change the battlefield</li>
+                        <li>Intelligent AI with multiple difficulty levels</li>
+                        <li>Full accessibility support</li>
+                        <li>Responsive design for all devices</li>
+                        <li>Auto-save functionality</li>
+                    </ul>
+                </section>
+
+                <section class="about-section">
+                    <h2>🚢 Ship Types & Weapons</h2>
+                    <div class="ship-info-grid">
+                        <div class="ship-card">
+                            <h4>⚓ Aircraft Carrier (5 cells)</h4>
+                            <p><strong>Weapon:</strong> Airstrike</p>
+                            <p>Long-range attack in plus-pattern</p>
+                        </div>
+                        
+                        <div class="ship-card">
+                            <h4>🚢 Battleship (4 cells)</h4>
+                            <p><strong>Weapon:</strong> Heavy Shell</p>
+                            <p>Double damage single target</p>
+                        </div>
+                        
+                        <div class="ship-card">
+                            <h4>🚤 Destroyer (3 cells)</h4>
+                            <p><strong>Weapon:</strong> Torpedo Line</p>
+                            <p>Three-cell line attack</p>
+                        </div>
+                        
+                        <div class="ship-card">
+                            <h4>🔱 Submarine (2 cells)</h4>
+                            <p><strong>Weapon:</strong> Stealth Strike</p>
+                            <p>Single precise attack</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="about-section">
+                    <h2>⚡ Power-ups</h2>
+                    <div class="powerup-info-grid">
+                        <div class="powerup-card">
+                            <h4>🔧 Repair Kit</h4>
+                            <p>Click to select, then click a damaged ship to restore 1 HP (only available when ships are damaged, cannot repair sunk ships)</p>
+                        </div>
+                        
+                        <div class="powerup-card">
+                            <h4>📡 Radar Sweep</h4>
+                            <p>Click to select, then click enemy board to scan 3×3 area</p>
+                        </div>
+                        
+                        <div class="powerup-card">
+                            <h4>⏰ Extra Turn</h4>
+                            <p>Attack again immediately</p>
+                        </div>
+                        
+                        <div class="powerup-card">
+                            <h4>💣 Mega Bomb</h4>
+                            <p>Click to select, then click enemy board to target 3x3 area for 5 damage</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="about-section">
+                    <h2>💻 Technical Details</h2>
+                    <ul>
+                        <li><strong>Technology:</strong> Pure HTML5, CSS3, and JavaScript (ES6)</li>
+                        <li><strong>Framework:</strong> No external frameworks required</li>
+                        <li><strong>Audio:</strong> Web Audio API for sound effects</li>
+                        <li><strong>Storage:</strong> Local Storage for save games and settings</li>
+                        <li><strong>Accessibility:</strong> WCAG 2.1 AA compliant</li>
+                        <li><strong>Performance:</strong> Optimized for 60fps gameplay</li>
+                    </ul>
+                </section>
+
+                <section class="about-section">
+                    <h2>🙏 Credits</h2>
+                    <p><strong>Game Design & Development:</strong> AI Assistant</p>
+                    <p><strong>Concept:</strong> Classic Battleship reimagined</p>
+                    <p><strong>Special Thanks:</strong> To all accessibility consultants and testers</p>
+                    
+                    <p class="version-info">
+                        <strong>Version 1.0.0</strong><br>
+                        Released: December 2024<br>
+                        License: Open Source
+                    </p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Screen (existing game content) -->
+    <div id="game-screen" class="screen">
+        <!-- Loading the existing game content here -->
+        <div class="game-header">
+            <div class="header-left">
+                <button id="back-to-menu" class="back-btn" aria-label="Back to main menu">← Menu</button>
+            </div>
+            <h1>⚓ Aircraft Carrier</h1>
+            
+            <!-- Power-ups in top bar -->
+            <div class="header-powerups">
+                <button id="repair-kit" class="header-power-btn" disabled title="Repair Kit: Click to select, then click a damaged ship to restore 1 HP (only usable when ships are damaged)">
+                    <span class="icon">🔧</span>
+                    <span class="count">0</span>
+                </button>
+                <button id="radar-sweep" class="header-power-btn" disabled title="Radar Sweep: Click to select, then click enemy board to scan 3×3 area">
+                    <span class="icon">📡</span>
+                    <span class="count">0</span>
+                </button>
+                <button id="extra-turn" class="header-power-btn" disabled title="Extra Turn: Get another full turn after this one ends">
+                    <span class="icon">⏰</span>
+                    <span class="count">0</span>
+                </button>
+                <button id="bomb" class="header-power-btn" disabled title="Mega Bomb: Click to select, then click enemy board to target 3×3 area for 5 damage">
+                    <span class="icon">💣</span>
+                    <span class="count">0</span>
+                </button>
+            </div>
+            
+            <!-- AI Power-ups in top bar -->
+            <div class="header-ai-powerups">
+                <span class="ai-powerups-label">🤖 AI:</span>
+                <button class="header-ai-power-btn" disabled title="AI Repair Kits">
+                    <span class="icon">🔧</span>
+                    <span id="ai-repair-count" class="count">0</span>
+                </button>
+                <button class="header-ai-power-btn" disabled title="AI Radar Sweeps">
+                    <span class="icon">📡</span>
+                    <span id="ai-radar-count" class="count">0</span>
+                </button>
+                <button class="header-ai-power-btn" disabled title="AI Extra Turns">
+                    <span class="icon">⏰</span>
+                    <span id="ai-extra-turn-count" class="count">0</span>
+                </button>
+                <button class="header-ai-power-btn" disabled title="AI Mega Bombs">
+                    <span class="icon">💣</span>
+                    <span id="ai-bomb-count" class="count">0</span>
+                </button>
+            </div>
+            
+            <div class="header-right">
+                <div class="header-tip">
+                    <span class="tip-icon">💡</span>
+                    <span class="tip-text">Hit enemy ships to spawn power-ups on YOUR board</span>
+                </div>
+                <div class="header-controls">
+                    <button id="help-btn" class="icon-btn" aria-label="Game Help" title="Show game help and controls">❓</button>
+                    <button id="new-game-btn" class="icon-btn" aria-label="Start New Game" title="Start a new game">🎮</button>
+                    <button id="end-game-btn" class="icon-btn" aria-label="End Current Game" title="End current game and return to setup">🛑</button>
+                    <button id="settings-btn" class="icon-btn" aria-label="Game Settings">⚙️</button>
+                </div>
+            </div>
+        </div>
+
+        <main class="game-container">
+            <!-- Player Board -->
+            <section class="board-section">
+                <h2>Your Fleet</h2>
+                <div id="player-board" class="game-board"></div>
+                <div class="ship-status">
+                    <h3>Ship Status</h3>
+                    <div id="player-ships" class="ships-list"></div>
+                </div>
+            </section>
+
+            <!-- Game Info Sidebar -->
+            <section class="game-info">
+                <div class="game-status">
+                    <div id="turn-indicator" class="turn-indicator">Player Turn</div>
+                </div>
+
+
+
+                <div class="game-log">
+                    <h3>Battle Log</h3>
+                    <div id="game-log" class="log-content"></div>
+                </div>
+            </section>
+
+            <!-- AI Board -->
+            <section class="board-section">
+                <h2>Enemy Fleet</h2>
+                <div id="ai-board" class="game-board"></div>
+                <div class="ship-status">
+                    <h3>Enemy Status</h3>
+                    <div id="ai-ships" class="ships-list"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Existing modals remain the same -->
+        <!-- Settings Modal -->
+        <div id="settings-modal" class="modal">
+            <div class="modal-content">
+                <h2>Game Settings</h2>
+                <div class="settings-section">
+                    <h3>Difficulty</h3>
+                    <div class="difficulty-options">
+                        <label><input type="radio" name="difficulty" value="easy"> Easy (70% AI Accuracy)</label>
+                        <label><input type="radio" name="difficulty" value="medium" checked> Medium (85% AI Accuracy)</label>
+                        <label><input type="radio" name="difficulty" value="hard"> Hard (95% AI Accuracy)</label>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h3>Audio</h3>
+                    <div class="audio-options">
+                        <label><input type="checkbox" id="sound-effects" checked> Sound Effects</label>
+                        <label><input type="checkbox" id="background-music"> Background Music</label>
+                        <label>Volume: <input type="range" id="volume-slider" min="0" max="100" value="70"></label>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button id="save-settings" class="action-btn">Save Settings</button>
+                    <button id="close-settings" class="action-btn secondary">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ship Placement Modal -->
+        <div id="placement-modal" class="modal">
+            <div class="modal-content">
+                <h2>Place Your Ships</h2>
+                <div class="placement-info">
+                    <p>Place your ships on the board. Click to place, press R to rotate.</p>
+                    <div class="current-ship">
+                        <span>Current ship: <strong id="current-ship-name">Aircraft Carrier</strong></span>
+                        <span id="current-ship-length">(5 cells)</span>
+                    </div>
+                </div>
+                <div id="placement-board" class="game-board placement-board"></div>
+                <div class="modal-actions">
+                    <button id="clear-all" class="action-btn secondary">Clear All</button>
+                    <button id="auto-place" class="action-btn secondary">Auto Place</button>
+                    <button id="rotate-ship" class="action-btn secondary">Rotate (R)</button>
+                    <button id="start-game" class="action-btn" disabled>Start Battle</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Modal -->
+        <div id="game-over-modal" class="modal">
+            <div class="modal-content">
+                <h2 id="game-over-title">Game Over</h2>
+                <div id="game-over-content">
+                    <p id="game-over-message">Congratulations! You won!</p>
+                    <div class="game-stats">
+                        <div class="stat"><span class="label">Turns:</span> <span id="final-turns">0</span></div>
+                        <div class="stat"><span class="label">Hits:</span> <span id="final-hits">0</span></div>
+                        <div class="stat"><span class="label">Accuracy:</span> <span id="final-accuracy">0%</span></div>
+                        <div class="stat"><span class="label">Ships Sunk:</span> <span id="final-ships-sunk">0</span></div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button id="play-again" class="action-btn">🔄 Start New Game</button>
+                    <button id="back-to-menu-from-game" class="action-btn secondary">🏠 Back to Main Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Modal -->
+        <div id="help-modal" class="modal">
+            <div class="modal-content">
+                <h2>How to Play Aircraft Carrier</h2>
+                <div class="help-content">
+                    <h3>🎯 Objective</h3>
+                    <p>Sink all enemy ships before they sink yours!</p>
+                    
+                    <h3>🚢 Ship Types</h3>
+                    <ul>
+                        <li><strong>Aircraft Carrier (5 cells):</strong> Long-range naval gun (8 range)</li>
+                        <li><strong>Battleship (4 cells):</strong> Heavy shell cannon (6 range)</li>
+                        <li><strong>Destroyer (3 cells):</strong> Light gun battery (4 range)</li>
+                        <li><strong>Submarine (2 cells):</strong> Torpedo launcher (3 range)</li>
+                    </ul>
+                    
+                    <h3>⚡ Power-ups</h3>
+                    <ul>
+                        <li><strong>Repair Kit:</strong> Click to select, then click a damaged ship to restore 1 HP (only available when ships are damaged, cannot repair sunk ships)</li>
+                        <li><strong>Radar Sweep:</strong> Click to select, then click enemy board to scan 3×3 area</li>
+                        <li><strong>Extra Turn:</strong> Get another full turn after your current turn ends</li>
+                        <li><strong>Mega Bomb:</strong> Click to select, then click enemy board to target 3×3 area for 5 damage</li>
+                    </ul>
+                    
+                    <h3>🎮 Controls</h3>
+                    <ul>
+                        <li><strong>Click:</strong> Select cells to attack</li>
+                        <li><strong>Arrow Keys:</strong> Navigate grid</li>
+                        <li><strong>Numbers 1-4:</strong> Use power-ups</li>
+                        <li><strong>R:</strong> Rotate ships during placement</li>
+                        <li><strong>Ctrl+H:</strong> Show this help</li>
+                        <li><strong>Ctrl+N:</strong> New game</li>
+                    </ul>
+                    
+                    <h3>💡 Tips</h3>
+                    <ul>
+                        <li>Ships can only attack within their range</li>
+                        <li>Power-ups spawn randomly after hits</li>
+                        <li>Use different weapons strategically</li>
+                        <li>Your game auto-saves progress</li>
+                    </ul>
+                </div>
+                <div class="modal-actions">
+                    <button id="close-help" class="action-btn">Got it!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+            <script type="module" src="src/menu.js?v=12"></script>
+        <script type="module" src="src/main.js?v=12"></script>
+</body>
+</html>

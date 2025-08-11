@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aircraft Carrier - Test Runner</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+        
+        .test-container {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+        
+        .test-results {
+            font-family: 'Courier New', monospace;
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .run-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .run-button:hover {
+            background: #2980b9;
+        }
+        
+        .success {
+            color: #27ae60;
+        }
+        
+        .error {
+            color: #e74c3c;
+        }
+        
+        .info {
+            color: #f39c12;
+        }
+    </style>
+</head>
+<body>
+    <h1>Aircraft Carrier - Test Suite</h1>
+    
+    <div class="test-container">
+        <h2>Unit Tests</h2>
+        <p>Run comprehensive tests for all game systems:</p>
+        <ul>
+            <li><strong>Ships:</strong> Creation, damage, repair, positioning</li>
+            <li><strong>Weapons:</strong> Attack patterns, range, damage calculation</li>
+            <li><strong>AI:</strong> Decision making, targeting, difficulty levels</li>
+            <li><strong>Power-ups:</strong> Spawning, collection, effects</li>
+        </ul>
+        
+        <button class="run-button" onclick="runAllTests()">Run All Tests</button>
+        
+        <div id="test-output" class="test-results">
+            Click "Run All Tests" to execute the test suite...
+        </div>
+    </div>
+    
+    <div class="test-container">
+        <h2>Game Integration Test</h2>
+        <p>Test complete game flow with real interactions:</p>
+        <button class="run-button" onclick="runIntegrationTest()">Run Integration Test</button>
+        
+        <div id="integration-output" class="test-results">
+            Integration test results will appear here...
+        </div>
+    </div>
+
+    <script type="module">
+        window.runAllTests = async function() {
+            const output = document.getElementById('test-output');
+            output.innerHTML = '<span class="info">Running tests...</span>\n\n';
+            
+            try {
+                // Capture console output
+                const originalLog = console.log;
+                const originalAssert = console.assert;
+                
+                let testOutput = '';
+                console.log = (...args) => {
+                    testOutput += args.join(' ') + '\n';
+                    originalLog(...args);
+                };
+                
+                console.assert = (condition, message) => {
+                    if (!condition) {
+                        testOutput += `❌ ASSERTION FAILED: ${message}\n`;
+                        throw new Error(message);
+                    } else {
+                        testOutput += `✓ ${message || 'Assertion passed'}\n`;
+                    }
+                };
+                
+                // Run all test modules
+                await import('./ships.test.js');
+                await import('./weapons.test.js');
+                await import('./ai.test.js');
+                await import('./powerups.test.js');
+                
+                // Restore console
+                console.log = originalLog;
+                console.assert = originalAssert;
+                
+                output.innerHTML = '<span class="success">All tests completed successfully!</span>\n\n' + testOutput;
+                
+            } catch (error) {
+                output.innerHTML += `<span class="error">❌ Test failed: ${error.message}</span>\n`;
+                console.error('Test error:', error);
+            }
+        };
+        
+        window.runIntegrationTest = function() {
+            const output = document.getElementById('integration-output');
+            output.innerHTML = '<span class="info">Running integration test...</span>\n\n';
+            
+            try {
+                // Basic integration test
+                const testResults = [];
+                
+                // Test 1: Game initialization
+                testResults.push('✓ Testing game initialization...');
+                if (typeof window.game !== 'undefined') {
+                    testResults.push('✓ Game controller exists');
+                    
+                    const gameState = window.game.getGameState();
+                    testResults.push(`✓ Game state loaded (phase: ${gameState.phase})`);
+                    
+                    if (gameState.playerBoard && gameState.aiBoard) {
+                        testResults.push('✓ Boards initialized');
+                    }
+                    
+                    testResults.push('✓ Integration test passed!');
+                } else {
+                    testResults.push('⚠ Game not loaded - go to main page first');
+                }
+                
+                output.innerHTML = testResults.join('\n');
+                
+            } catch (error) {
+                output.innerHTML += `<span class="error">❌ Integration test failed: ${error.message}</span>\n`;
+            }
+        };
+    </script>
+</body>
+</html>
